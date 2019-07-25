@@ -1,9 +1,6 @@
 package com.oocl.packagebooking.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -15,6 +12,9 @@ public class Package {
 
     private String waybillNumber;
 
+    /**
+     * 0：未取件 1：已预约 2：已取件
+     */
     private Integer status;
 
     private String phone;

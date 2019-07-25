@@ -1,4 +1,9 @@
 package com.oocl.packagebooking.repository;
 
-public class PackageRepository {
+import com.oocl.packagebooking.entity.Package;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface PackageRepository extends JpaRepository<Package, Integer> {
 }
