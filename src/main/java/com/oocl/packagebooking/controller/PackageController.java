@@ -33,4 +33,10 @@ public class PackageController {
         List<Package> byStatus = packageService.findByStatus(status);
         return ResponseEntity.ok().body(byStatus);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity update(@PathVariable Integer id, @RequestBody Package p){
+        Package update = packageService.update(id, p);
+        return ResponseEntity.ok().body(update);
+    }
 }

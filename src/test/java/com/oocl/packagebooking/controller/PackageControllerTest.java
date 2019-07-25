@@ -22,8 +22,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import java.util.Date;
 import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -82,5 +81,15 @@ public class PackageControllerTest {
         Assertions.assertEquals(1, result.length());
         Assertions.assertEquals(initP2.getId().intValue(), result.getJSONObject(0).getInt("id"));
         Assertions.assertEquals(1, result.getJSONObject(0).getInt("status"));
+    }
+
+    @Test
+    public void should_return_correct_package_when_put() throws Exception {
+        Package p = new Package("1234566789", 1, "13131313131", new Date(), 5.5);
+        MvcResult mvcResult = this.mockMvc.perform(put("/packages/"+initP1.getId())
+                .contentType(MediaType.APPLICATION_JSON).content(JSON.toJSONString(p)))
+                .andReturn();
+        JSONObject result = new JSONObject(mvcResult.getResponse().getContentAsString());
+        Assertions.assertEquals(p.getStatus().intValue(), result.getInt("status"));
     }
 }

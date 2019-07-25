@@ -24,4 +24,9 @@ public class PackageService {
     public List<Package> findByStatus(Integer status) {
         return packageRepository.findByStatus(status);
     }
+
+    public Package update(Integer id, Package p) {
+        p.setId(id);
+        return  packageRepository.save(p);
+    }
 }
