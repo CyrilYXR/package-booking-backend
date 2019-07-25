@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PackageRepository extends JpaRepository<Package, Integer> {
+public interface PackageRepository extends JpaRepository<Package, Long> {
     List<Package> findByStatus(Integer status);
 }

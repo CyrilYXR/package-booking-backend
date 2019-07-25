@@ -41,8 +41,8 @@ public class PackageControllerTest {
 
     @Before
     public void initDb(){
-        initP1 = packageRepository.save(new Package("1234566789", 0, "13131313131", new Date(), 5.5));
-        initP2 = packageRepository.save(new Package("1234566789", 1, "13131313131", new Date(), 5.5));
+        initP1 = packageRepository.save(new Package(1234566789L, "张三",0, "13131313131", new Date(), 5.5));
+        initP2 = packageRepository.save(new Package(1234566788L,"李四", 1, "13131313131", new Date(), 5.5));
     }
 
     @After
@@ -56,13 +56,12 @@ public class PackageControllerTest {
                 .andReturn();
         JSONArray result = new JSONArray(mvcResult.getResponse().getContentAsString());
         Assertions.assertEquals(2, result.length());
-        Assertions.assertEquals(initP1.getId().intValue(), result.getJSONObject(0).getInt("id"));
     }
 
     @Test
     public void should_return_created_package_when_post() throws Exception {
         //given
-        Package p = new Package("11111111", 0, "13131313131", new Date(), 5.5);
+        Package p = new Package(11111111L,"cyril", 0, "13131313131", new Date(), 5.5);
         //when
         MvcResult mvcResult = this.mockMvc.perform(post("/packages")
                 .contentType(MediaType.APPLICATION_JSON).content(JSON.toJSONString(p)))
@@ -79,14 +78,14 @@ public class PackageControllerTest {
                 .andReturn();
         JSONArray result = new JSONArray(mvcResult.getResponse().getContentAsString());
         Assertions.assertEquals(1, result.length());
-        Assertions.assertEquals(initP2.getId().intValue(), result.getJSONObject(0).getInt("id"));
+        Assertions.assertEquals(initP2.getWaybillNumber().longValue(), result.getJSONObject(0).getInt("waybillNumber"));
         Assertions.assertEquals(1, result.getJSONObject(0).getInt("status"));
     }
 
     @Test
     public void should_return_correct_package_when_put() throws Exception {
-        Package p = new Package("1234566789", 1, "13131313131", new Date(), 5.5);
-        MvcResult mvcResult = this.mockMvc.perform(put("/packages/"+initP1.getId())
+        Package p = new Package(1234566789L,"cccc", 1, "13131313131", new Date(), 5.5);
+        MvcResult mvcResult = this.mockMvc.perform(put("/packages/"+initP1.getWaybillNumber())
                 .contentType(MediaType.APPLICATION_JSON).content(JSON.toJSONString(p)))
                 .andReturn();
         JSONObject result = new JSONObject(mvcResult.getResponse().getContentAsString());

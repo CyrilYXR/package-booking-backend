@@ -25,8 +25,8 @@ public class PackageService {
         return packageRepository.findByStatus(status);
     }
 
-    public Package update(Integer id, Package p) {
-        p.setId(id);
+    public Package update(Long id, Package p) {
+        p.setWaybillNumber(id);
         return  packageRepository.save(p);
     }
 }

@@ -7,11 +7,9 @@ import java.util.Date;
 public class Package {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long waybillNumber;
 
-    @Column(unique = true)
-    private String waybillNumber;
+    private String name;
 
     /**
      * 0：未取件 1：已预约 2：已取件
@@ -27,28 +25,29 @@ public class Package {
     public Package() {
     }
 
-    public Package(String waybillNumber, Integer status, String phone, Date reserveTime, Double weight) {
+    public Package(Long waybillNumber, String name, Integer status, String phone, Date reserveTime, Double weight) {
         this.waybillNumber = waybillNumber;
+        this.name = name;
         this.status = status;
         this.phone = phone;
         this.reserveTime = reserveTime;
         this.weight = weight;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getWaybillNumber() {
+    public Long getWaybillNumber() {
         return waybillNumber;
     }
 
-    public void setWaybillNumber(String waybillNumber) {
+    public void setWaybillNumber(Long waybillNumber) {
         this.waybillNumber = waybillNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getStatus() {
