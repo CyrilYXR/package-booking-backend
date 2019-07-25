@@ -19,4 +19,5 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.0.0'
+	compile 'com.alibaba:fastjson:1.2.47'
 }

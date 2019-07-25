@@ -16,4 +16,8 @@ public class PackageService {
     public List<Package> findAll() {
         return packageRepository.findAll();
     }
+
+    public Package add(Package p) {
+        return packageRepository.save(p);
+    }
 }

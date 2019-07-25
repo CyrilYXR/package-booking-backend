@@ -3,10 +3,9 @@ package com.oocl.packagebooking.controller;
 import com.oocl.packagebooking.entity.Package;
 import com.oocl.packagebooking.service.PackageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +20,11 @@ public class PackageController {
     public ResponseEntity findAll(){
         List<Package> packages = packageService.findAll();
         return ResponseEntity.ok().body(packages);
+    }
+
+    @PostMapping()
+    public ResponseEntity add(@RequestBody Package p){
+        Package aPackage = packageService.add(p);
+        return ResponseEntity.status(HttpStatus.CREATED).body(aPackage);
     }
 }
