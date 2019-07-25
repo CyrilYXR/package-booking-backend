@@ -43,7 +43,7 @@ public class PackageControllerTest {
     @Before
     public void initDb(){
         initP1 = packageRepository.save(new Package("1234566789", 0, "13131313131", new Date(), 5.5));
-        initP2 = packageRepository.save(new Package("1234566789", 0, "13131313131", new Date(), 5.5));
+        initP2 = packageRepository.save(new Package("1234566789", 1, "13131313131", new Date(), 5.5));
     }
 
     @After
@@ -72,5 +72,15 @@ public class PackageControllerTest {
         JSONObject result = new JSONObject(mvcResult.getResponse().getContentAsString());
         //then
         Assertions.assertEquals(p.getPhone(), result.getString("phone"));
+    }
+
+    @Test
+    public void should_return_correct_packages_when_find_by_status() throws Exception {
+        MvcResult mvcResult = this.mockMvc.perform(get("/packages").param("status", "1")).andExpect(status().isOk())
+                .andReturn();
+        JSONArray result = new JSONArray(mvcResult.getResponse().getContentAsString());
+        Assertions.assertEquals(1, result.length());
+        Assertions.assertEquals(initP2.getId().intValue(), result.getJSONObject(0).getInt("id"));
+        Assertions.assertEquals(1, result.getJSONObject(0).getInt("status"));
     }
 }

@@ -27,4 +27,10 @@ public class PackageController {
         Package aPackage = packageService.add(p);
         return ResponseEntity.status(HttpStatus.CREATED).body(aPackage);
     }
+
+    @GetMapping(params = {"status"})
+    public ResponseEntity findByStatus(@RequestParam Integer status){
+        List<Package> byStatus = packageService.findByStatus(status);
+        return ResponseEntity.ok().body(byStatus);
+    }
 }
