@@ -8,7 +8,6 @@ import com.alibaba.fastjson.JSON;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.Date;
-import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -78,14 +76,14 @@ public class PackageControllerTest {
                 .andReturn();
         JSONArray result = new JSONArray(mvcResult.getResponse().getContentAsString());
         Assertions.assertEquals(1, result.length());
-        Assertions.assertEquals(initP2.getWaybillNumber().longValue(), result.getJSONObject(0).getInt("waybillNumber"));
+        Assertions.assertEquals(initP2.getId().longValue(), result.getJSONObject(0).getInt("waybillNumber"));
         Assertions.assertEquals(1, result.getJSONObject(0).getInt("status"));
     }
 
     @Test
     public void should_return_correct_package_when_put() throws Exception {
         Package p = new Package(1234566789L,"cccc", 1, "13131313131", new Date(), 5.5);
-        MvcResult mvcResult = this.mockMvc.perform(put("/packages/"+initP1.getWaybillNumber())
+        MvcResult mvcResult = this.mockMvc.perform(put("/packages/"+initP1.getId())
                 .contentType(MediaType.APPLICATION_JSON).content(JSON.toJSONString(p)))
                 .andReturn();
         JSONObject result = new JSONObject(mvcResult.getResponse().getContentAsString());

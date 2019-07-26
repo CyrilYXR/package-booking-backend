@@ -7,7 +7,8 @@ import java.util.Date;
 public class Package {
 
     @Id
-    private Long waybillNumber;
+    @Column(unique = true, nullable = false)
+    private Long id;
 
     private String name;
 
@@ -25,8 +26,8 @@ public class Package {
     public Package() {
     }
 
-    public Package(Long waybillNumber, String name, Integer status, String phone, Date reserveTime, Double weight) {
-        this.waybillNumber = waybillNumber;
+    public Package(Long id, String name, Integer status, String phone, Date reserveTime, Double weight) {
+        this.id = id;
         this.name = name;
         this.status = status;
         this.phone = phone;
@@ -34,12 +35,12 @@ public class Package {
         this.weight = weight;
     }
 
-    public Long getWaybillNumber() {
-        return waybillNumber;
+    public Long getId() {
+        return id;
     }
 
-    public void setWaybillNumber(Long waybillNumber) {
-        this.waybillNumber = waybillNumber;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

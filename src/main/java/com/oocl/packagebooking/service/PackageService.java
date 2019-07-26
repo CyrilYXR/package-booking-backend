@@ -26,7 +26,22 @@ public class PackageService {
     }
 
     public Package update(Long id, Package p) {
-        p.setWaybillNumber(id);
-        return  packageRepository.save(p);
+        Package newPackage = packageRepository.findById(id).get();
+        if(p.getName()!=null){
+            newPackage.setName(p.getName());
+        }
+        if(p.getPhone()!=null){
+            newPackage.setPhone(p.getPhone());
+        }
+        if(p.getReserveTime()!=null){
+            newPackage.setReserveTime(p.getReserveTime());
+        }
+        if(p.getStatus()!=null){
+            newPackage.setStatus(p.getStatus());
+        }
+        if(p.getWeight()!=null){
+            newPackage.setWeight(p.getWeight());
+        }
+        return  packageRepository.save(newPackage);
     }
 }
